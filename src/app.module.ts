@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { AccountModule } from './account/account.module';
 import EncryptService from './services/encrypt.service';
 import { ConfigModule } from '@nestjs/config';
+import { AuthSpotifyModule } from './auth-spotify/auth-spotify.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ConfigModule } from '@nestjs/config';
     UserModule,
     AuthModule,
     AccountModule,
+    AuthSpotifyModule,
   ],
   controllers: [AppController],
   providers: [AppService, EncryptService],
