@@ -1,28 +1,20 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UserModule } from './user/user.module';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AuthModule } from './auth/auth.module';
-import { AccountModule } from './account/account.module';
-import EncryptService from './services/encrypt.service';
 import { ConfigModule } from '@nestjs/config';
-import { AuthSpotifyModule } from './auth-spotify/auth-spotify.module';
+import { GraphqlModule } from './graphql/graphql.module';
+import { SpotifyAuthModule } from './spotify-auth/spotify-auth.module';
+import { SpotifyArtistNameModule } from './spotify-artist-name/spotify-artist-name.module';
 
 @Module({
   imports: [
+    GraphqlModule,
     ConfigModule.forRoot({
       envFilePath: ['.env', '.env.development.local', '.env.example'],
       isGlobal: true,
     }),
     MongooseModule.forRoot(process.env.MONGODB_URL || ''),
-    UserModule,
-    AuthModule,
-    AccountModule,
-    AuthSpotifyModule,
+    SpotifyAuthModule,
+    SpotifyArtistNameModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, EncryptService],
-  exports: [EncryptService],
 })
 export class AppModule {}
